@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useDistanceStore from "./store/useDistanceStore";
 
+import Block from "./Loaders/Block";
+import Threedots from "./Loaders/ThreeDots";
+
 function App() {
   const { distances, addDistance, setSelectedDistance, selectedDistance } =
     useDistanceStore();
@@ -12,7 +15,7 @@ function App() {
       fetch("http://localhost:5000/data")
         .then((res) => res.text())
         .then((text) => {
-          const match = text.match(/(\d+)/); // extract numeric value
+          const match = text.match(/(\d+)/);
           if (match) {
             const value = Number(match[1]);
 
@@ -29,7 +32,7 @@ function App() {
     };
 
     fetchData(); 
-    const interval = setInterval(fetchData, 1000); // fetch every second
+    const interval = setInterval(fetchData, 1000); 
     return () => clearInterval(interval);
   }, [addDistance, setSelectedDistance]);
 
@@ -56,6 +59,9 @@ function App() {
           ))}
         </ul>
       </div>
+      
+    <Block/>
+    <Threedots/>
     </div>
   );
 }
